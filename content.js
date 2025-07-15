@@ -1,13 +1,18 @@
+const DUMMY_IMG =
+  "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
 function getSongInfo() {
   const titleEl = document.querySelector(".title.ytmusic-player-bar");
   const artistEl = document.querySelector(".byline.ytmusic-player-bar");
   const albumImg = document.querySelector("#thumbnail img");
+  const albumAltImg = document.querySelector(".middle-controls img");
   const progressBar = document.querySelector("#progress-bar");
 
   const title = titleEl?.innerText || "Unknown";
   const artist = artistEl?.innerText || "Unknown";
-  const albumName = albumImg?.alt || "Unknown Album";
-  const albumImage = albumImg?.src || "";
+
+  const albumName = albumImg?.alt || albumAltImg?.alt || "Unknown Album";
+  const albumImage =
+    (albumImg?.src === DUMMY_IMG ? albumAltImg?.src : albumImg?.src) || "";
   const progress_ms = Number(progressBar?.getAttribute("aria-valuenow") || 0);
   const duration_ms = Number(progressBar?.getAttribute("aria-valuemax") || 0);
 
